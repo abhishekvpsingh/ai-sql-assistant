@@ -1,0 +1,10 @@
+# Ignore environment file
+.env
+
+# Ignore Python virtual environment folder
+ai_sql_assistant_env/
+
+__pycache__/
+*.pyc
+.DS_Store
+*.log
