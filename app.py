@@ -6,9 +6,17 @@ st.title("AI-Powered SQL Assistant")
 prompt = st.text_input("Ask a question about your data:")
 
 table_info = """Available tables:
-1. claims(id, status, claim_date, customer_id)
-2. customers(id, name, age, location)
-"""  # Customize this per your schema
+raw_orders(
+                InvoiceNo VARCHAR,
+                StockCode VARCHAR,
+                Description VARCHAR,
+                Quantity NUMBER,
+                InvoiceDate TIMESTAMP_NTZ,
+                UnitPrice NUMBER,
+                CustomerID NUMBER,
+                Country VARCHAR
+            )
+"""
 
 if prompt:
     with st.spinner("Generating SQL..."):
