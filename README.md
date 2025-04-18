@@ -1,13 +1,14 @@
 # 💬 AI-Powered SQL Query Assistant
 
-This project is an AI-based tool that allows users to enter plain English questions about their data, converts them into SQL queries using OpenAI, and runs them directly on a Snowflake data warehouse. It is built using Python and Streamlit for a simple and interactive interface.
+This project is an AI-based tool that allows users to enter plain English questions about their data, converts them into SQL queries using **OpenAI or Ollama**, and runs them directly on a **Snowflake** data warehouse. It is built using **Python** and **Streamlit** for a simple and interactive interface.
 
 ---
 
 ## 📌 Features
 
-- Convert natural language questions into SQL queries using OpenAI.
-- Run queries on Snowflake and display results in a friendly format.
+- Convert natural language questions into SQL queries using **OpenAI GPT** or **Ollama (free & local)**.
+- Run queries on Snowflake and display results in a user-friendly format.
+- Choose your AI model provider directly from the UI.
 - Simple web UI built with Streamlit.
 - Easy setup and extensible for real-world use.
 
@@ -16,7 +17,8 @@ This project is an AI-based tool that allows users to enter plain English questi
 ## 🧠 Tech Stack
 
 - Python 3.9+
-- OpenAI GPT-3.5 Turbo
+- OpenAI GPT-4o or GPT-3.5 Turbo
+- Ollama (local LLM like LLaMA3)
 - Streamlit
 - Snowflake Connector for Python
 - Dotenv for managing secrets
@@ -59,13 +61,64 @@ SNOWFLAKE_SCHEMA=your_schema
 SNOWFLAKE_WAREHOUSE=your_warehouse
 ```
 
-### 4. Start the Streamlit App
+### 4. Install & Run Ollama (Optional if using local models)
+
+#### ✅ macOS
+
+```bash
+brew install ollama
+ollama run llama3
+```
+
+#### ✅ Windows (via WSL recommended)
+
+1. Install WSL (Windows Subsystem for Linux)
+2. Inside WSL:
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ollama run llama3
+   ```
+
+#### ✅ Linux (Ubuntu/Debian)
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama run llama3
+```
+
+This will pull and start the **llama3** model locally at `http://localhost:11434`.
+
+> ❗ Make sure `ollama` is running before you start the Streamlit app if you select "Ollama" as the model provider.
+
+---
+
+### 5. Start the Streamlit App
 
 ```bash
 streamlit run app.py
 ```
 
-This will launch the app in your browser at `http://localhost:8501`
+Then go to [http://localhost:8501](http://localhost:8501) in your browser.
+
+---
+
+## 💡 Sample Table Metadata (for testing)
+
+You can define your Snowflake schema in `app.py` to give the AI context. Example:
+
+```plaintext
+Available tables:
+raw_orders(
+    InvoiceNo VARCHAR,
+    StockCode VARCHAR,
+    Description VARCHAR,
+    Quantity NUMBER,
+    InvoiceDate TIMESTAMP_NTZ,
+    UnitPrice NUMBER,
+    CustomerID NUMBER,
+    Country VARCHAR
+)
+```
 
 ---
 
@@ -75,36 +128,25 @@ This will launch the app in your browser at `http://localhost:8501`
 ai-sql-assistant/
 │
 ├── app.py                    # Streamlit UI and logic
-├── query_generator.py        # Logic to call OpenAI and generate SQL
+├── query_generator.py        # Handles OpenAI & Ollama-based SQL generation
 ├── snowflake_utils.py        # Snowflake connection and query execution
-├── .env                      # Environment variables (not pushed to Git)
+├── .env                      # Environment variables (excluded from Git)
 ├── requirements.txt          # Python dependencies
 └── README.md                 # Project documentation
 ```
 
 ---
 
-## 💡 Sample Table Metadata (for testing)
+## 🔧 Future Enhancements
 
-You can define your Snowflake schema in `app.py` for AI context. For example:
-
-```plaintext
-Available tables:
-1. claims(id, status, claim_date, customer_id)
-2. customers(id, name, age, location)
-```
-
----
-
-## 🔧 Future Enhancements (Optional)
-
-- ✅ Add authentication (login interface using Streamlit’s login manager or Firebase)
-- ✅ Display SQL query execution time and record counts
+- ✅ Use either OpenAI or Ollama for SQL generation
+- ✅ Add authentication (login interface)
+- ✅ Display SQL query execution time and record count
 - ✅ Save history of queries and results
-- ✅ Add chat-like interaction with memory
+- ✅ Add chat-style interface with memory
 - ✅ Use RAG (Retrieval-Augmented Generation) for better schema-awareness
-- ✅ Export query results as CSV or Excel
-- ✅ Improve error handling and display suggestions if query fails
+- ✅ Export results as CSV/Excel
+- ✅ Improve error handling and give AI-powered suggestions on failure
 
 ---
 
@@ -112,4 +154,8 @@ Available tables:
 
 **Abhishek Singh**
 
-If you found this helpful, feel free to ⭐ the repo and connect with me on [LinkedIn](https://www.linkedin.com/abhishekvpsingh/)
+If you found this helpful, feel free to ⭐ the repo and connect with me on [LinkedIn](https://www.linkedin.com/in/abhishekvpsingh/)
+
+---
+
+Let me know if you'd like a badge for "Supports Ollama ✅" or a `.gif` demo added too!
