@@ -155,7 +155,3 @@ ai-sql-assistant/
 **Abhishek Singh**
 
 If you found this helpful, feel free to ⭐ the repo and connect with me on [LinkedIn](https://www.linkedin.com/in/abhishekvpsingh/)
-
----
-
-Let me know if you'd like a badge for "Supports Ollama ✅" or a `.gif` demo added too!
