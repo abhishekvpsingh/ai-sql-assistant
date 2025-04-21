@@ -6,11 +6,12 @@ This project is an AI-based tool that allows users to enter plain English questi
 
 ## 📌 Features
 
-- Convert natural language questions into SQL queries using **OpenAI GPT** or **Ollama (free & local)**.
-- Run queries on Snowflake and display results in a user-friendly format.
-- Choose your AI model provider directly from the UI.
-- Simple web UI built with Streamlit.
-- Easy setup and extensible for real-world use.
+- ✅ Convert natural language questions into SQL queries using **OpenAI GPT** or **Ollama (free & local)**.
+- ✅ Enter table names, and the app fetches corresponding schema automatically from **Snowflake** for AI context.
+- ✅ Choose your AI model provider (OpenAI or Ollama) directly from the UI.
+- ✅ Run generated queries on Snowflake and display results in a clean, readable format.
+- ✅ Simple web UI built with Streamlit.
+- ✅ Fast and extensible for real-world enterprise scenarios.
 
 ---
 
@@ -61,6 +62,8 @@ SNOWFLAKE_SCHEMA=your_schema
 SNOWFLAKE_WAREHOUSE=your_warehouse
 ```
 
+---
+
 ### 4. Install & Run Ollama (Optional if using local models)
 
 #### ✅ macOS
@@ -102,23 +105,10 @@ Then go to [http://localhost:8501](http://localhost:8501) in your browser.
 
 ---
 
-## 💡 Sample Table Metadata (for testing)
+## 💡 How Table Schema Works Now
 
-You can define your Snowflake schema in `app.py` to give the AI context. Example:
-
-```plaintext
-Available tables:
-raw_orders(
-    InvoiceNo VARCHAR,
-    StockCode VARCHAR,
-    Description VARCHAR,
-    Quantity NUMBER,
-    InvoiceDate TIMESTAMP_NTZ,
-    UnitPrice NUMBER,
-    CustomerID NUMBER,
-    Country VARCHAR
-)
-```
+Instead of hardcoding schema, users can simply enter one or more **table names** in the UI.  
+The app will connect to **Snowflake**, retrieve schema for those tables automatically, and use them as context for the AI prompt — resulting in more accurate SQL generation.
 
 ---
 
@@ -129,7 +119,7 @@ ai-sql-assistant/
 │
 ├── app.py                    # Streamlit UI and logic
 ├── query_generator.py        # Handles OpenAI & Ollama-based SQL generation
-├── snowflake_utils.py        # Snowflake connection and query execution
+├── snowflake_utils.py        # Snowflake connection, dynamic schema, and query execution
 ├── .env                      # Environment variables (excluded from Git)
 ├── requirements.txt          # Python dependencies
 └── README.md                 # Project documentation
@@ -139,12 +129,12 @@ ai-sql-assistant/
 
 ## 🔧 Future Enhancements
 
-- ✅ Use either OpenAI or Ollama for SQL generation
+- ✅ Support for multiple databases or warehouses
 - ✅ Add authentication (login interface)
 - ✅ Display SQL query execution time and record count
 - ✅ Save history of queries and results
 - ✅ Add chat-style interface with memory
-- ✅ Use RAG (Retrieval-Augmented Generation) for better schema-awareness
+- ✅ Support for multiple databases or warehouses
 - ✅ Export results as CSV/Excel
 - ✅ Improve error handling and give AI-powered suggestions on failure
 
