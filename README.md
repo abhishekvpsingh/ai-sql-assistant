@@ -144,4 +144,3 @@ ai-sql-assistant/
 
 **Abhishek Singh**
 
-If you found this helpful, feel free to ⭐ the repo and connect with me on [LinkedIn](https://www.linkedin.com/in/abhishekvpsingh/)
